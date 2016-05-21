@@ -94,9 +94,9 @@ namespace Lab_Conveyer
                     Name = $"labelTask{i}",
                     Text = $"Задание {i+1}",
                     AutoSize = true,
-                    Font = new Font(font, 10)
+                    Font = new Font(font, 8)
                 };
-                label.Location = new Point(10, 20 + i * 30);
+                label.Location = new Point(10, 23 + i * 30);
                 groupBox3.Controls.Add(label);
 
                 var box = new TextBox
@@ -104,7 +104,7 @@ namespace Lab_Conveyer
                     Name = $"task{i}Field",
                     AutoSize = true
                 };
-                box.Location = new Point(100, 20 + i*30);
+                box.Location = new Point(70, 20 + i*30);
                 groupBox3.Controls.Add(box);
             }
         }
@@ -174,9 +174,9 @@ namespace Lab_Conveyer
                     Name = $"labelTask{i}",
                     Text = $"Задание {i + 1}",
                     AutoSize = true,
-                    Font = new Font(font, 10)
+                    Font = new Font(font, 8)
                 };
-                label.Location = new Point(10, 20 + i * 30);
+                label.Location = new Point(10, 23 + i * 30);
                 groupBox2.Controls.Add(label);
 
                 var box = new TextBox
@@ -184,7 +184,7 @@ namespace Lab_Conveyer
                     Name = $"check{i}Field",
                     AutoSize = true
                 };
-                box.Location = new Point(100, 20 + i * 30);
+                box.Location = new Point(70, 20 + i * 30);
                 groupBox2.Controls.Add(box);
             }
         }
