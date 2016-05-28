@@ -1,6 +1,6 @@
 ﻿namespace Lab_Conveyer
 {
-    partial class Form1
+    partial class NetworkForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,10 +31,10 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.switchValueField = new System.Windows.Forms.TextBox();
+            this.packetSizeField = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tactValueField = new System.Windows.Forms.TextBox();
-            this.taskNumberField = new System.Windows.Forms.TextBox();
+            this.speedValueField = new System.Windows.Forms.TextBox();
+            this.devNumberField = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.loadNumBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -64,10 +64,10 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.switchValueField);
+            this.groupBox1.Controls.Add(this.packetSizeField);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.tactValueField);
-            this.groupBox1.Controls.Add(this.taskNumberField);
+            this.groupBox1.Controls.Add(this.speedValueField);
+            this.groupBox1.Controls.Add(this.devNumberField);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -80,55 +80,55 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label3.Location = new System.Drawing.Point(6, 76);
+            this.label3.Location = new System.Drawing.Point(3, 76);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 13);
+            this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Время переключения";
+            this.label3.Text = "Размер пакета";
             // 
-            // switchValueField
+            // packetSizeField
             // 
-            this.switchValueField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.switchValueField.Location = new System.Drawing.Point(125, 71);
-            this.switchValueField.Name = "switchValueField";
-            this.switchValueField.Size = new System.Drawing.Size(94, 23);
-            this.switchValueField.TabIndex = 5;
+            this.packetSizeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.packetSizeField.Location = new System.Drawing.Point(125, 71);
+            this.packetSizeField.Name = "packetSizeField";
+            this.packetSizeField.Size = new System.Drawing.Size(94, 23);
+            this.packetSizeField.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label1.Location = new System.Drawing.Point(6, 18);
+            this.label1.Location = new System.Drawing.Point(3, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.Size = new System.Drawing.Size(120, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Количество задач";
+            this.label1.Text = "Количество устройств";
             // 
-            // tactValueField
+            // speedValueField
             // 
-            this.tactValueField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tactValueField.Location = new System.Drawing.Point(125, 43);
-            this.tactValueField.Name = "tactValueField";
-            this.tactValueField.Size = new System.Drawing.Size(94, 23);
-            this.tactValueField.TabIndex = 3;
+            this.speedValueField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.speedValueField.Location = new System.Drawing.Point(125, 43);
+            this.speedValueField.Name = "speedValueField";
+            this.speedValueField.Size = new System.Drawing.Size(94, 23);
+            this.speedValueField.TabIndex = 3;
             // 
-            // taskNumberField
+            // devNumberField
             // 
-            this.taskNumberField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.taskNumberField.Location = new System.Drawing.Point(125, 14);
-            this.taskNumberField.Name = "taskNumberField";
-            this.taskNumberField.Size = new System.Drawing.Size(94, 23);
-            this.taskNumberField.TabIndex = 1;
+            this.devNumberField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.devNumberField.Location = new System.Drawing.Point(125, 14);
+            this.devNumberField.Name = "devNumberField";
+            this.devNumberField.Size = new System.Drawing.Size(94, 23);
+            this.devNumberField.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label2.Location = new System.Drawing.Point(6, 47);
+            this.label2.Location = new System.Drawing.Point(3, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.Size = new System.Drawing.Size(81, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Время такта";
+            this.label2.Text = "Скорость сети";
             // 
             // loadNumBtn
             // 
@@ -299,7 +299,6 @@
             // 
             // chart1
             // 
-            this.chart1.BackColor = System.Drawing.SystemColors.Control;
             chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
             chartArea1.AxisX.LabelStyle.Enabled = false;
             chartArea1.AxisX.MajorGrid.Enabled = false;
@@ -316,7 +315,7 @@
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             // 
-            // Form1
+            // NetworkForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -324,9 +323,9 @@
             this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(900, 500);
-            this.Name = "Form1";
-            this.Text = "Процессорный конвейер";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "NetworkForm";
+            this.Text = "Монопольная передача в сети";
+            this.Load += new System.EventHandler(this.NetworkForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -344,12 +343,12 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox taskNumberField;
+        private System.Windows.Forms.TextBox devNumberField;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button loadNumBtn;
-        private System.Windows.Forms.TextBox switchValueField;
+        private System.Windows.Forms.TextBox packetSizeField;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tactValueField;
+        private System.Windows.Forms.TextBox speedValueField;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

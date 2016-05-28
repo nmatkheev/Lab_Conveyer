@@ -12,20 +12,20 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Lab_Conveyer
 {
-    public partial class Form1 : Form
+    public partial class NetworkForm : Form
     {
-        public FacilityCPU instance;
+        public FacilityNetwork instance;
 
-        public float tact;
-        public float swit;
-        public int tasknum;
+        public float speed;
+        public float packetsize;
+        public int devicenum;
 
-        public Form1()
+        public NetworkForm()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void NetworkForm_Load(object sender, EventArgs e)
         {
             initButtonLogic();
         }
@@ -46,7 +46,7 @@ namespace Lab_Conveyer
                 try
                 {
                     var value = (dynamic)null; ;
-                    if (ctrl.Name == "taskNumberField")
+                    if (ctrl.Name == "devNumberField")
                     {
                         value = int.Parse(ctrl.Text);
                     }
@@ -56,14 +56,14 @@ namespace Lab_Conveyer
                     }
                     switch (ctrl.Name)
                     {
-                        case "taskNumberField":
-                            tasknum = value;
+                        case "devNumberField":
+                            devicenum = value;
                             break;
-                        case "tactValueField":
-                            tact = value;
+                        case "speedValueField":
+                            speed = value;
                             break;
-                        case "switchValueField":
-                            swit = value;
+                        case "packetSizeField":
+                            packetsize = value;
                             break;
                     }
                     //ctrl.Enabled = false;
@@ -76,12 +76,15 @@ namespace Lab_Conveyer
             }
             if (quorum == 3)
             {
-                GenerateTaskFields(tasknum);
+                GenerateTaskFields(devicenum);
                 calculateButton.Enabled = true;
                 loadNumBtn.Enabled = false;
             }
-                
+
             else MessageBox.Show(@"Давай по новой", @"ConveyerLab", MessageBoxButtons.OK);
+
+
+
         }
 
         private void GenerateTaskFields(int tasknum)
@@ -92,7 +95,7 @@ namespace Lab_Conveyer
                 var label = new Label
                 {
                     Name = $"labelTask{i}",
-                    Text = $"Задание {i+1}",
+                    Text = $"Dev {i + 1}",
                     AutoSize = true,
                     Font = new Font(font, 8)
                 };
@@ -101,10 +104,12 @@ namespace Lab_Conveyer
 
                 var box = new TextBox
                 {
-                    Name = $"task{i}Field",
+                    Name = $"dev{i}Field",
+                    Enabled = false,
+                    Text = packetsize.ToString(),
                     AutoSize = true
                 };
-                box.Location = new Point(70, 20 + i*30);
+                box.Location = new Point(70, 20 + i * 30);
                 groupBox3.Controls.Add(box);
             }
         }
@@ -114,7 +119,7 @@ namespace Lab_Conveyer
         {
             int quorum = 0;
             var data = new List<int>();
-            Regex rgxField = new Regex(@"task(\d+)Field");
+            Regex rgxField = new Regex(@"dev(\d+)Field");
             foreach (TextBox ctrl in groupBox3.Controls.OfType<TextBox>().Where(ctrl => rgxField.IsMatch(ctrl.Name)))
             {
                 try
@@ -129,14 +134,14 @@ namespace Lab_Conveyer
                 }
             }
 
-            if (quorum != tasknum)
+            if (quorum != devicenum)
             {
                 MessageBox.Show(@"Давай по новой", @"ConveyerLab", MessageBoxButtons.OK);
                 return;
             }
-            instance = new FacilityCPU(tact, swit, data);
-                
-            for (int i = 0; i < tasknum; i++)
+            instance = new FacilityNetwork(speed, data);
+
+            for (int i = 0; i < devicenum; i++)
             {
                 chart1.Series.Add($"Series{i + 1}");
                 chart1.Series[$"Series{i + 1}"].ChartType = SeriesChartType.RangeBar;
@@ -146,7 +151,7 @@ namespace Lab_Conveyer
                 chart1.Legends[$"Legend{i + 1}"].DockedToChartArea = "ChartArea1";
                 chart1.Series[$"Series{i + 1}"].Legend = $"Legend{i + 1}";
                 chart1.Series[$"Series{i + 1}"].IsVisibleInLegend = true;
-                chart1.Series[$"Series{i + 1}"].LegendText = $"Task #{i + 1}";
+                chart1.Series[$"Series{i + 1}"].LegendText = $"Device #{i + 1}";
             }
 
             for (var i = 0; i < instance.dur_index.Count; i++)
@@ -154,7 +159,7 @@ namespace Lab_Conveyer
                 if (instance.dur_index[i] == int.MaxValue) continue;
 
                 var seriesIndex = $"Series{instance.dur_index[i] + 1}";
-                chart1.Series[seriesIndex].Points.AddXY(1, i*20, i*20 + 20);
+                chart1.Series[seriesIndex].Points.AddXY(1, i * 20 + 20, i * 20);
             }
             chart1.DataBind();
             checkAnswerButton.Enabled = true;
@@ -167,7 +172,7 @@ namespace Lab_Conveyer
         private void generateTestBoxes()
         {
             var font = label1.Font.FontFamily;
-            for (var i = 0; i < tasknum; i++)
+            for (var i = 0; i < devicenum; i++)
             {
                 var label = new Label
                 {
@@ -236,7 +241,7 @@ namespace Lab_Conveyer
                     quorum--;
                 }
             }
-            if (quorum == tasknum)
+            if (quorum == devicenum)
             {
                 for (int x = 0; x < userAnswer.Count; x++)
                 {
@@ -247,7 +252,5 @@ namespace Lab_Conveyer
             }
             else MessageBox.Show("Полная ерунда, считай лучше!", @"ConveyerLab", MessageBoxButtons.OK);
         }
-
-        
     }
 }

@@ -1,55 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.SqlServer.Server;
 
 namespace Lab_Conveyer
 {
-    public class FacilityCPU
+    public class FacilityNetwork
     {
-        public float tact;
+        public float speed;
         public float swit;
         public float sum;
         public float max;
 
-        private List<int>   data       = new List<int>();
-        public  List<float> res        = new List<float>();
+        private List<int> data = new List<int>();
+        public List<float> res = new List<float>();
 
-        private List<int>   whole_tact  = new List<int>();
-        private List<int>   whole_tact1 = new List<int>();
-        private List<float> rest_mean   = new List<float>();
-        private List<float> rest_mean1  = new List<float>();
+        private List<int> whole_tact = new List<int>();
+        private List<int> whole_tact1 = new List<int>();
+        private List<float> rest_mean = new List<float>();
+        private List<float> rest_mean1 = new List<float>();
 
-        public  List<int>   dur_index  = new List<int>();
-        public  List<float> dur_value  = new List<float>();
+        public List<int> dur_index = new List<int>();
+        public List<float> dur_value = new List<float>();
 
-        private List<int>   range      = new List<int>();
+        private List<int> range = new List<int>();
 
-        private List<bool>  endcond    = new List<bool>();
+        private List<bool> endcond = new List<bool>();
 
-        public FacilityCPU(float _tact, float _swit, List<int> outerdata)
+        public FacilityNetwork(float _speed, List<int> outerdata)
         {
             data = outerdata;
-            tact = _tact;
-            swit = _swit;
+            speed = _speed;
 
             for (var c = 0; c < data.Count; c++)
                 range.Add(c);
 
             foreach (var z in range)
             {
-                whole_tact.Add(data[z] / (int)tact);
-                rest_mean.Add(data[z] % tact);
+                if (data[z] <= speed) {
+                    whole_tact.Add(data[z] / (int)speed);
+                    rest_mean.Add(1);
+                }
+                else
+                {
+                    whole_tact.Add(data[z] / (int)speed);
+                    if (data[z] % (int)speed != 0)
+                        rest_mean.Add(1);
+                    else
+                        rest_mean.Add(0);
+                }
             }
             rest_mean1 = new List<float>(rest_mean);
             whole_tact1 = new List<int>(whole_tact);
             for (int i = 0; i < data.Count; i++)
                 endcond.Add(false);
-            
+
 
             Schedule();
             CountTask();
@@ -67,17 +71,13 @@ namespace Lab_Conveyer
                     {
                         whole_tact[x]--;
                         dur_index.Add(x);
-                        dur_index.Add(Int32.MaxValue);
-                        dur_value.Add(tact);
-                        dur_value.Add(swit);
+                        dur_value.Add(1);
                         continue;
                     }
                     if (rest_mean[x] != 0)
                     {
                         dur_index.Add(x);
-                        dur_index.Add(Int32.MaxValue);
-                        dur_value.Add(rest_mean[x]);
-                        dur_value.Add(swit);
+                        dur_value.Add(1);
                         rest_mean[x] = 0;
                     }
                     endcond[x] = true;
@@ -89,26 +89,26 @@ namespace Lab_Conveyer
                     endschedule = true;
             }
 
-            dur_index.RemoveAt(dur_index.Count-1);
-            dur_value.RemoveAt(dur_value.Count-1);
+            //dur_index.RemoveAt(dur_index.Count - 1);
+            //dur_value.RemoveAt(dur_value.Count - 1);
         }
 
         public void CountTask()
         {
             foreach (var task in range)
             {
-                
+
                 int _pos = 0;
                 float occur = 0;
                 float cmp = 0;
 
                 res.Add(0);
-               
+
                 if (rest_mean1[task] != 0)
                     cmp = whole_tact1[task] + 1;
                 else
                     cmp = whole_tact1[task];
-                
+
                 while (occur != cmp)
                 {
                     if (dur_index[_pos] == task)
@@ -123,9 +123,9 @@ namespace Lab_Conveyer
                 sum += i;
                 iter++;
             }
-            
+
             max = data.Max();
-            
+
         }
     }
 }
